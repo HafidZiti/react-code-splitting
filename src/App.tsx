@@ -1,24 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Todo, { Itodo } from "./components/todo";
 
 function App() {
+  const todos: Itodo[] = [
+    { id: 1, title: "todo-1", completed: false },
+    { id: 2, title: "todo-2", completed: true },
+    { id: 3, title: "todo-3", completed: false },
+  ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {todos.map((todo, i) => (
+        <Todo key={i} todo={todo}></Todo>
+      ))}
     </div>
   );
 }
