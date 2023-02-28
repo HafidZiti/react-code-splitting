@@ -1,20 +1,18 @@
 import React from "react";
 
-export interface Itodo {
+export interface TodoProps {
   id: number;
   title: string;
   completed: boolean;
 }
 
 type props = {
-  todo: Itodo;
+  todo: TodoProps;
 };
 
-const Todo: React.FC<props> = ({ todo }) => {
+export const Todo: React.FC<props> = ({ todo }) => {
   const { id, title, completed } = todo;
   const h1 = <h1>{title}</h1>;
   const text = completed ? <strong>{h1}</strong> : h1;
   return <div data-testid={`todo-${id}`}>{text}</div>;
 };
-
-export default Todo;

@@ -1,14 +1,14 @@
 import React from "react";
 import { render, screen, cleanup } from "@testing-library/react";
 import renderer from "react-test-renderer";
-import Todo, { Itodo } from "../todo";
+import { Todo, TodoProps } from "../todo";
 
 afterEach(() => {
   cleanup();
 });
 
 test("should render non-completed todo component", () => {
-  const mockProps: Itodo = { id: 1, title: "task-1", completed: false };
+  const mockProps: TodoProps = { id: 1, title: "task-1", completed: false };
   render(<Todo todo={mockProps} />);
   const todoElement = screen.getByTestId("todo-1");
   expect(todoElement).toBeInTheDocument();
@@ -17,7 +17,7 @@ test("should render non-completed todo component", () => {
 });
 
 test("should render completed todo component", () => {
-  const mockProps: Itodo = { id: 2, title: "task-2", completed: true };
+  const mockProps: TodoProps = { id: 2, title: "task-2", completed: true };
   render(<Todo todo={mockProps} />);
   const todoElement = screen.getByTestId("todo-2");
   expect(todoElement).toBeInTheDocument();
@@ -26,7 +26,7 @@ test("should render completed todo component", () => {
 });
 
 test("matches snapshot", () => {
-  const mockProps: Itodo = { id: 2, title: "task-2", completed: true };
+  const mockProps: TodoProps = { id: 2, title: "task-2", completed: true };
   const tree = renderer.create(<Todo todo={mockProps} />).toJSON();
   console.log(tree);
   expect(tree).toMatchSnapshot();
