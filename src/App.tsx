@@ -1,18 +1,37 @@
-import React from "react";
-import { Todo, TodoProps } from "./modules/todos";
+import React, { lazy, Suspense } from "react";
+import { Link, Routes, Route, Outlet } from "react-router-dom";
+
+const Home = lazy(() => import("./pages/home"));
+const Store = lazy(() => import("./pages/store"));
+const Todos = lazy(() => import("./pages/todos"));
+const About = lazy(() => import("./pages/about"));
 
 function App() {
-  const todos: TodoProps[] = [
-    { id: 1, title: "todo-1", completed: false },
-    { id: 2, title: "todo-2", completed: true },
-    { id: 3, title: "todo-3", completed: false },
-  ];
   return (
-    <div className="App">
-      {todos.map((todo, i) => (
-        <Todo key={i} todo={todo}></Todo>
-      ))}
-    </div>
+    <Routes>
+      <Route path="/" element={<NavWrapper />}>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/store" element={<Store />}></Route>
+        <Route path="/todo" element={<Todos />}></Route>
+        <Route path="/about" element={<About />}></Route>
+      </Route>
+    </Routes>
+  );
+}
+
+function NavWrapper() {
+  return (
+    <>
+      <nav style={{ display: "flex", gap: "1rem" }}>
+        <Link to="/">Home</Link>
+        <Link to="/store">Store</Link>
+        <Link to="/todo">Todo</Link>
+        <Link to="/about">About</Link>
+      </nav>
+      <Suspense fallback={<h4>Loading...</h4>}>
+        <Outlet />
+      </Suspense>
+    </>
   );
 }
 
