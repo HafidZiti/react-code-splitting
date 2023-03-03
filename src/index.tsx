@@ -4,6 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/query-core";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+// Create a client
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,7 +17,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

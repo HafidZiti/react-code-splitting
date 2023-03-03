@@ -12,7 +12,7 @@ type props = {
 
 export const Todo: React.FC<props> = ({ todo }) => {
   const { id, title, completed } = todo;
-  const h1 = <h1>{title}</h1>;
-  const text = completed ? <strong>{h1}</strong> : h1;
+  const p = <p>{title}</p>;
+  const text = completed ? <strong>{p}</strong> : p;
   return <div data-testid={`todo-${id}`}>{text}</div>;
 };
