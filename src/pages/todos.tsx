@@ -1,18 +1,10 @@
-import { AxiosError } from "axios";
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Todo, TodoProps } from "../modules/todos";
-import { getTodos } from "../services/todos";
+import { useTodos } from "../hooks/todoHooks";
 
 const Todos: React.FC = () => {
   // Queries
-  const { isLoading, isError, data, error } = useQuery<TodoProps[], AxiosError>(
-    {
-      queryKey: ["todos"],
-      queryFn: getTodos,
-      retry: false,
-    }
-  );
+  const { isLoading, isError, data, error } = useTodos();
 
   return (
     <>

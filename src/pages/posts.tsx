@@ -1,17 +1,10 @@
 import React from "react";
-import { AxiosError } from "axios";
-import { useQuery } from "@tanstack/react-query";
 import { IPost, Post } from "../modules/posts/components/post";
-import { getPosts } from "../services/posts";
 import { NewPost } from "../modules/posts";
+import { usePosts } from "../hooks/postHooks";
 
 const Posts: React.FC = () => {
-  const { isLoading, isError, data, error } = useQuery<IPost[], AxiosError>({
-    queryKey: ["posts"],
-    queryFn: getPosts,
-    retry: false,
-    staleTime: 5 * 60 * 1000,
-  });
+  const { isLoading, isError, data, error } = usePosts();
 
   return (
     <>
